@@ -1,0 +1,19 @@
+
+Create Table User(uid int Auto_increment  PRIMARY KEY,
+user_name VARCHAR(100),
+first_name VARCHAR(100),
+last_name VARCHAR(100),
+email VARCHAR(100),
+dob DATE);
+
+CREATE Table Task(t_id int Auto_increment NOT NULL PRIMARY KEY,
+description VARCHAR(100),
+priority enum('LOW','HIGH','MEDIUM'),
+status enum('TO_DO','IN_PROGRESS','DONE'),
+project enum('PAM','TRAVEL','LMS’),
+hour_spent int,
+estimated_hour int,
+uid INT,
+FOREIGN KEY(uid)
+REFERENCES User(uid)
+);

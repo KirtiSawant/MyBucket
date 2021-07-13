@@ -1,50 +1,58 @@
-package com.mybucket.user.model;
+package com.mybucket.model;
 
-import javax.persistence.*;
+import com.mybucket.model.Task;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.lang.Nullable;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name="User")
-public class User {
-
+@Data
+@Table("User")
+public class User{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(name="UserName")
+    private int uid;
+
     @NotEmpty(message = "User Name is mandatory")
     private String userName;
-    @Column(name="First_Name")
     @NotEmpty(message = "First name is required")
     private String firstName;
-    @Column(name="Last_Name")
+    @Nullable
     private String lastName;
-    @Column(name="Email")
     @NotEmpty(message = "Email is required")
     @Email
     private String email;
-    @Column(name="DateOfBirth")
     private String dob;
+     @MappedCollection(keyColumn = "uid",idColumn ="uid")
+     private Task tasks;
 
-    public User(int id,String userName,String firstName, String lastName, String email,String  dob) {
-    this.id=id;
-    this.userName=userName;
-    this.firstName=firstName;
-    this.lastName=lastName;
-    this.email=email;
-    this.dob=dob;
+     public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
+        this.uid=uid;
+        this.userName=userName;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
+        this.dob=dob;
+        this.tasks=tasks;
 
     }
-
-    public int getId() {
-        return id;
+    public User() {
+    }
+    public Task getTasks(){
+        return (Task) tasks;
+    }
+    public void setTask(Task tasks){
+        this.tasks=tasks;
+    }
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
-
     public String getUserName() {
         return userName;
     }
@@ -85,4 +93,9 @@ public class User {
     public void setDob(String dob) {
         this.dob = dob;
     }
+
+
+
+
+
 }
