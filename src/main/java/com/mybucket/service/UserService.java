@@ -27,7 +27,6 @@ public class UserService {
         user.setUid(uid);
         return   userRepository.save(user);
     }
-
     public  void deleteUser(int uid){
         userRepository.deleteById(uid);
     }

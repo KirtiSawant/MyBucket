@@ -22,7 +22,6 @@ import java.util.List;
 public class TaskController {
     @Autowired
     TaskService taskService;
-
     @PostMapping(value = "tasks")
     public Task addTask(@Valid @RequestBody Task task) {
         return taskService.addTask(task);
@@ -66,7 +65,7 @@ public class TaskController {
     }
 
     @GetMapping("/taskStatus")
-    public List<Task> getEstimatedHours(@RequestParam String status) {
+    public List<TaskJoin> getEstimatedHours(@RequestParam String status) {
         return taskService.getEstimatedHours(status);
     }
     /*

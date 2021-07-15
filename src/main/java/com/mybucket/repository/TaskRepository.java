@@ -23,8 +23,10 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
    // @Query("select new com.mybucket.model.TaskJoin(t.t_id,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour,t.uid,t.user_name) from task t, user u where t.user = u")
     @Query("SELECT t.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour from user u INNER JOIN task t ON u.uid=t.uid where t.uid=:uid")
     List<TaskJoin> findTaskUser(@Param("uid") int uid);
-    @Query("SELECT t.uid,u.user_name,SUM(t.estimated_hour)  FROM user u INNER JOIN task t ON u.uid=t.uid where t.status=:status")
-    List<Task> findStatus(String status);
+
+    @Query("SELECT t.uid,u.user_name,SUM(t.estimated_hour)  FROM user u INNER JOIN task t" +
+            " ON u.uid=t.uid where t.status=:status")
+     List<TaskJoin> findStatus(String status);
 
 
     //@Query("select * from task t where t.project=:project")

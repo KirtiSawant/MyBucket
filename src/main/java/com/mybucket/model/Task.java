@@ -6,6 +6,7 @@ import com.mybucket.enums.Status;
 import com.mybucket.validation.EnumNamePattern;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 
@@ -28,17 +29,15 @@ public class Task {
     private Project project;
     private int hourSpent;
     private int estimatedHour;
-    //@MappedCollection(keyColumn = "uid",idColumn ="uid")
-    private User uid;
-
+    //@MappedCollection(idColumn ="uid")
+ /*   private User uid;
+    
     public User getUid() {
         return uid;
     }
-
     public void setUid(User uid) {
         this.uid = uid;
-    }
-
+    }*/
     public int gettId() {
         return tId;
     }
@@ -105,6 +104,7 @@ public class Task {
                 ", project=" + project +
                 ", hourSpent=" + hourSpent +
                 ", estimatedHour=" + estimatedHour +
+               // ", uid=" + uid +
                 '}';
     }
 }

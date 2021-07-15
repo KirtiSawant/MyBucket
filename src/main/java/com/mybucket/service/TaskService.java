@@ -7,6 +7,7 @@ import com.mybucket.model.Task;
 import com.mybucket.model.TaskJoin;
 import com.mybucket.model.User;
 import com.mybucket.repository.TaskRepository;
+import com.mybucket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -18,16 +19,28 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
     @Autowired
     TaskRepository taskRepository;
-    // private Sort.Direction getSortDirection(String direction) {
+
+    @Autowired
+    UserRepository userRepository;
 
     public Task addTask(Task task) {
       //  User user = new User();
       //  user.setTask(task);
+     /*   User user2 = task.getUid();
+        if(user2 != null){
+            int uid = 1;
+            Optional<User> user=userRepository.findById(uid);
+            if(user.isPresent()){
+                task.setUid(user.get());
+            }
+        }*/
+
         return taskRepository.save(task);
     }
 
@@ -53,7 +66,7 @@ public class TaskService {
         return "Task Deleted";
     }
 
-    public List<Task> getEstimatedHours(String status) {
+    public List<TaskJoin> getEstimatedHours(String status) {
         return taskRepository.findStatus(status);
     }
 
