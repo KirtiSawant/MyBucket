@@ -14,7 +14,6 @@ import javax.validation.constraints.NotEmpty;
 public class User{
     @Id
     private int uid;
-
     @NotEmpty(message = "User Name is mandatory")
     private String userName;
     @NotEmpty(message = "First name is required")
@@ -25,7 +24,7 @@ public class User{
     @Email
     private String email;
     private String dob;
-     @MappedCollection(keyColumn = "uid",idColumn ="uid")
+     @MappedCollection(keyColumn = "user.uid",idColumn ="uid")
      private Task tasks;
 
      public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
@@ -36,7 +35,6 @@ public class User{
         this.email=email;
         this.dob=dob;
         this.tasks=tasks;
-
     }
     public User() {
     }

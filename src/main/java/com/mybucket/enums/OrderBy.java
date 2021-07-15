@@ -1,7 +1,7 @@
 package com.mybucket.enums;
 
 public enum OrderBy {
-    ID("id"), USERID("userId");
+    ID("t_id"), Project("project");
     private String OrderByCode;
     private OrderBy(String orderBy) {
         this.OrderByCode = orderBy;

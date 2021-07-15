@@ -1,4 +1,4 @@
-package com.mybucket.model;
+package com.mybucket.enums;
 
 public enum Status {
     TO_DO,

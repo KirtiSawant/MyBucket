@@ -1,5 +1,8 @@
 package com.mybucket.model;
 
+import com.mybucket.enums.Priority;
+import com.mybucket.enums.Project;
+import com.mybucket.enums.Status;
 import lombok.Data;
 
 @Data
