@@ -1,6 +1,7 @@
 package com.mybucket.repository;
 
 import com.mybucket.model.User;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,9 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User,Integer> {
 
     String  deleteById(int uid);
-  //  List<User> findAll();
+    //@Query(value = "select u.uid,u.user_name,u.first_name,u.last_name,u.email,u.dob from user u")
+   //List<User> getUser();
+    List<User> findAll();
 
 
 }

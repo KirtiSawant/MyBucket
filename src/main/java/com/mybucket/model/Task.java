@@ -23,21 +23,21 @@ public class Task {
     private String description;
     @EnumNamePattern(regexp = "LOW|HIGH|MEDIUM")
     private Priority priority;
-
+    @EnumNamePattern(regexp = "TO_DO|IN_PROGRESS|DONE")
     private Status status;
-    @NotNull
+    @EnumNamePattern(regexp = "PAM|TRAVEL|LMS")
     private Project project;
     private int hourSpent;
     private int estimatedHour;
-    //@MappedCollection(idColumn ="uid")
- /*   private User uid;
+  //  @MappedCollection(keyColumn = "uid",idColumn ="uid")
+   private int uid;
     
-    public User getUid() {
+    public int getUid() {
         return uid;
     }
-    public void setUid(User uid) {
+    public void setUid(int uid) {
         this.uid = uid;
-    }*/
+    }
     public int gettId() {
         return tId;
     }
@@ -104,7 +104,7 @@ public class Task {
                 ", project=" + project +
                 ", hourSpent=" + hourSpent +
                 ", estimatedHour=" + estimatedHour +
-               // ", uid=" + uid +
+                ", uid=" + uid +
                 '}';
     }
 }

@@ -24,7 +24,7 @@ public class User{
     @Email
     private String email;
     private String dob;
-     @MappedCollection(keyColumn = "tId",idColumn ="t_Id")
+     @MappedCollection(keyColumn = "uid",idColumn ="uid")
      private Task tasks;
 
      public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){

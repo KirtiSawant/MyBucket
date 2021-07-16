@@ -27,23 +27,7 @@ public class TaskController {
         return taskService.addTask(task);
     }
 
-    /*
-       @GetMapping("/task")
-        public List<Task> getTasks(@RequestParam("page") int page){
-            return taskService.getTasks();
-        }
 
-        @GetMapping("task")
-        public List<Task> findAllBySortAndPage(@RequestParam("page") final int page, @RequestParam("size") final int size,
-                                               @RequestParam("sortBy") final String sortBy, @RequestParam("sortOrder") final String sortOrder) {
-            PageRequest pageable = PageRequest.of(page, size, Sort.Direction.fromString(sortOrder), sortBy);
-            Page<Task> result = taskService.findAll(pageable);
-            if (!result.isEmpty())
-                return result.getContent();
-            else
-                return new ArrayList<Task>();
-        }
-    */
     @GetMapping("/task/user/{uid}")
     public List<TaskJoin> getTaskForUser(@PathVariable("uid") int uid) {
         return taskService.getTaskForUser(uid);
@@ -65,27 +49,9 @@ public class TaskController {
     }
 
     @GetMapping("/taskStatus")
-    public List<TaskJoin> getEstimatedHours(@RequestParam String status) {
+    public List<GroupUser> getEstimatedHours(@RequestParam String status) {
         return taskService.getEstimatedHours(status);
     }
-    /*
-    @GetMapping("/task/project")
-
-    public List<Task> getProject(@RequestParam String project){
-        return taskService.getProject(project);
-    }  */
-/*
-    @GetMapping("tasks/status")
-    public ResponseEntity<List<Task>> getAllTask(
-            @RequestParam (defaultValue = "false")String status,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize,
-            @RequestParam(defaultValue = "tId") String sort[])
-    {
-        List<Task> list = (List<Task>) taskService.getAllTask(pageNo, pageSize, sort,status);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-*/
 
     @GetMapping("tasks/status")
     public ResponseEntity<List<Task>> searchStatus(
@@ -118,8 +84,19 @@ public class TaskController {
         List<Task> list = taskService.searchPriority(pageNo, pageSize, sort,priority);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+/*
+    @GetMapping("tasks/user")
+    public ResponseEntity<List<TaskJoin>> searchUser(
+            @RequestParam (defaultValue = "false")String userName,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize,
+            @RequestParam(defaultValue = "tId") String[] sort)
+    {
+        List<TaskJoin> list = taskService.searchUser(pageNo, pageSize, sort,userName);
+        return (ResponseEntity<List<TaskJoin>>) list;
+    }
 
-
+*/
 
 
 /*
