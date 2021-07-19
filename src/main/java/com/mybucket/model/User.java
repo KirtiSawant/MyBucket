@@ -14,18 +14,23 @@ import javax.validation.constraints.NotEmpty;
 public class User{
     @Id
     private int uid;
+
     @NotEmpty(message = "User Name is mandatory")
     private String userName;
+
     @NotEmpty(message = "First name is required")
     private String firstName;
+
     @Nullable
     private String lastName;
+
+
     @NotEmpty(message = "Email is required")
     @Email
     private String email;
     private String dob;
      @MappedCollection(keyColumn = "uid",idColumn ="uid")
-     private Task tasks;
+    private Task tasks;
 
      public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
         this.uid=uid;
@@ -38,12 +43,7 @@ public class User{
     }
     public User() {
     }
-    public Task getTasks(){
-        return (Task) tasks;
-    }
-    public void setTask(Task tasks){
-        this.tasks=tasks;
-    }
+
     public int getUid() {
         return uid;
     }
@@ -92,8 +92,11 @@ public class User{
         this.dob = dob;
     }
 
+    public Task getTasks() {
+        return tasks;
+    }
 
-
-
-
+    public void setTasks(Task tasks) {
+        this.tasks = tasks;
+    }
 }

@@ -7,8 +7,8 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.mybucket.controller","com.mybucket.service"})
-@EnableJdbcRepositories(basePackages="com.mybucket.repository")
+//@ComponentScan(basePackages = {"com.mybucket.controller","com.mybucket.service"})
+//@EnableJdbcRepositories(basePackages="com.mybucket.repository")
 public class MyBucketApplication {
 
 	public static void main(String[] args){

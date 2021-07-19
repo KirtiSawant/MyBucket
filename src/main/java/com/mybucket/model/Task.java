@@ -3,7 +3,6 @@ package com.mybucket.model;
 import com.mybucket.enums.Priority;
 import com.mybucket.enums.Project;
 import com.mybucket.enums.Status;
-import com.mybucket.validation.EnumNamePattern;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
@@ -21,16 +20,16 @@ public class Task {
     private int tId;
     @NotBlank(message = "Description is mandatory")
     private String description;
-    @EnumNamePattern(regexp = "LOW|HIGH|MEDIUM")
+  //  @EnumNamePattern(regexp = "LOW|HIGH|MEDIUM")
     private Priority priority;
-    @EnumNamePattern(regexp = "TO_DO|IN_PROGRESS|DONE")
+  //  @EnumNamePattern(regexp = "TO_DO|IN_PROGRESS|DONE")
     private Status status;
-    @EnumNamePattern(regexp = "PAM|TRAVEL|LMS")
+  //  @EnumNamePattern(regexp = "PAM|TRAVEL|LMS")
     private Project project;
     private int hourSpent;
     private int estimatedHour;
   //  @MappedCollection(keyColumn = "uid",idColumn ="uid")
-   private int uid;
+       private int uid;
     
     public int getUid() {
         return uid;
