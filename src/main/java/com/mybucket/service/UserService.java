@@ -19,7 +19,7 @@ public class UserService {
     public List<User> getUser() {
         return (List<User>) userRepository.findAll();
     }
-    public User getUser(int uid){
+    public User getUserById(int uid){
         return userRepository.findById(uid).get();
     }
 

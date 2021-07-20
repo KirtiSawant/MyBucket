@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.lang.Nullable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Table("User")
@@ -21,7 +22,7 @@ public class User{
     @NotEmpty(message = "First name is required")
     private String firstName;
 
-    @Nullable
+    @NotNull(message = "NotNull")
     private String lastName;
 
 

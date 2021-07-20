@@ -3,12 +3,11 @@ package com.mybucket.model;
 import com.mybucket.enums.Priority;
 import com.mybucket.enums.Project;
 import com.mybucket.enums.Status;
+import com.mybucket.validation.EnumNamePattern;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-
-
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -20,13 +19,19 @@ public class Task {
     private int tId;
     @NotBlank(message = "Description is mandatory")
     private String description;
-  //  @EnumNamePattern(regexp = "LOW|HIGH|MEDIUM")
-    private Priority priority;
-  //  @EnumNamePattern(regexp = "TO_DO|IN_PROGRESS|DONE")
-    private Status status;
-  //  @EnumNamePattern(regexp = "PAM|TRAVEL|LMS")
-    private Project project;
+
+    //@NotBlank(message = "enum value LOW/HIGH/MEDIUM")
+    @EnumNamePattern(message = "Must be any of Enum LOW/HIGH/MEDIUM",enumClass =Priority.class)
+    private String priority;
+
+    @EnumNamePattern(message = "Must be any of Enum DONE/IN_PROGRESS/TO_DO",enumClass = Status.class)
+    private String status;
+
+    @EnumNamePattern(message = "Must be any of Enum PAM/TRAVEL/LMS",enumClass = Project.class)
+    private String project;
+    @NotNull
     private int hourSpent;
+    @NotNull
     private int estimatedHour;
   //  @MappedCollection(keyColumn = "uid",idColumn ="uid")
        private int uid;
@@ -69,27 +74,35 @@ public class Task {
         this.estimatedHour = estimatedHour;
     }
 
-    public Priority getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    public Status getStatus() {
+    /* public Priority getPriority() {
+            return priority;
+        }
+
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+    */
+    public String  getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Project getProject() {
+    public String getProject() {
         return project;
     }
 
-    public void setProject(Project project) {
+    public void setProject(String project) {
         this.project = project;
     }
 

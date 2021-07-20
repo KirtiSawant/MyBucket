@@ -19,7 +19,6 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
     List<TaskJoin> findTaskUser(@Param("uid") int uid);
       @Query(value = "select t.uid,t.t_id,u.user_name,t.status,sum(t.estimated_hour) as estimated_hour from task t INNER JOIN user u ON u.uid=t.uid where t.status=:status GROUP BY u.user_name")
      List<GroupUser> sumByStatus(String status);
-
     //Page<Task>findAll(Pageable pageable);
 
 
@@ -31,7 +30,5 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
     //Page<Task> findAll(Pageable pageable);
 
 
- //   @Query(value = "SELECT t.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour from user u INNER JOIN task t ON u.uid=t.uid where u.user_name=:user_name")
-  //  Page<TaskJoin> findByUserName(String userName, Pageable paging);
-     //List<TaskJoin>findAll(Pageable paging);
+
 }

@@ -35,8 +35,8 @@ public ResponseEntity<String> addUser(@RequestBody @Valid User user) {
     }
 
     @GetMapping("/user/{uid}")
-    public User getUser(@PathVariable("uid") int uid) {
-        return userService.getUser(uid);
+    public User getUserById(@PathVariable("uid") int uid) {
+        return userService.getUserById(uid);
     }
 
 
