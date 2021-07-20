@@ -21,6 +21,7 @@ public class TaskService {
     @Autowired
     TaskRepository taskRepository;
 
+
   //  @Autowired
   //  UserRepository userRepository;
 
@@ -60,73 +61,16 @@ public class TaskService {
     public List<GroupUser> getEstimatedHours(String status) {
         return taskRepository.sumByStatus(status);
     }
-
-
-
-    public List<Task> searchStatus(Integer pageNo, Integer pageSize, String[] sortby, String status) {
-
-        //List<Sort.Order> orders = new ArrayList<Sort.Order>();
-        //   orders.add(new Sort.Order(getSortDirection().isAscending()));
-      /*  Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "project");
-        orders.add(order1);
-        Sort.Order order2 = new Sort.Order(Sort.Direction.ASC, "priority");
-        orders.add(order2);*/
-
-
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("project").descending().and(Sort.by("priority")));
-        Page<Task> pageResult;
-        if (status == null)
-            pageResult = taskRepository.findAll(paging);
-        else
-            pageResult = taskRepository.findByStatus(status, paging);
-
-        if (pageResult.hasContent()) {
-            return pageResult.getContent();
-        } else {
-            return new ArrayList<Task>();
-        }
-    }
-
-    public List<Task> searchProject(Integer pageNo, Integer pageSize, String[] sort, String project) {
-      //  Sort sort =  Sort.by("status").descending().and(Sort.by("priority").descending());
-
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("status").descending().and(Sort.by("priority")));
-        Page<Task> pageResult;
-        if (project == null)
-            pageResult = taskRepository.findAll(paging);
-        else
-            pageResult = taskRepository.findByProject(project, paging);
-
-        if (pageResult.hasContent()) {
-            return pageResult.getContent();
-        } else {
-            return new ArrayList<Task>();
-        }
-    }
-    public List<Task> searchPriority(Integer pageNo, Integer pageSize, String[] sort, String priority) {
-
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("status").descending().and(Sort.by("project")).descending());
-        Page<Task> pageResult;
-        if (priority == null)
-            pageResult = taskRepository.findAll(paging);
-        else
-            pageResult = taskRepository.findByPriority(priority, paging);
-
-        if (pageResult.hasContent()) {
-            return pageResult.getContent();
-        } else {
-            return new ArrayList<Task>();
-        }
-    }
 /*
-    public List<TaskJoin> searchUser(Integer pageNo, Integer pageSize, String[] sort, String userName) {
 
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("t_id").descending());
+    public List<TaskJoin> search(Integer pageNo, Integer pageSize,String status ,String project,String priority,String userName) {
+        List<TaskJoin> tutorials = new ArrayList<TaskJoin>();
+        Pageable paging = PageRequest.of(pageNo, pageSize);
         Page<TaskJoin> pageResult;
-
-          //  pageResult = (Page<TaskJoin>) taskRepository.findAll(paging);
-
-            pageResult =  taskRepository.findByUserName(userName, paging);
+        if (status == null  && project==null && priority==null && userName==null)
+            pageResult =  taskRepository.findAll(paging);
+        else
+            pageResult = (Page<TaskJoin>) taskRepository.findByStatusAndProjectAndPriorityAndUserName(status, project,priority,userName,paging);
 
         if (pageResult.hasContent()) {
             return pageResult.getContent();
@@ -134,7 +78,34 @@ public class TaskService {
             return new ArrayList<TaskJoin>();
         }
     }
+
     */
+
+    public List<Task> search(Integer pageNo, Integer pageSize,String status ,String project,String priority) {
+      // List<Sort.Order> orders = new ArrayList<Sort.Order>();
+          //orders.add(new Sort.Order(getSortDirection().isAscending()));
+     // Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "project");
+    //   orders.add(order1);
+       // Sort sortOrder = Sort.by("project");
+       //List<Task> list = taskRepository.findAll(sortOrder);
+        Pageable paging = PageRequest.of(pageNo, pageSize,Sort.by("tId").descending().and(Sort.by("project")).descending().
+                                                            and(Sort.by("priority")).ascending());
+        Page<Task> pageResult;
+        if (status == null  && project==null && priority==null)
+            pageResult = taskRepository.findAll(paging);
+        else
+            pageResult = taskRepository.findByStatusAndProjectAndPriority(status, project,priority,paging);
+
+        if (pageResult.hasContent()) {
+            return pageResult.getContent();
+        } else {
+            return new ArrayList<Task>();
+        }
+    }
+
+
+
+
 
 }
 

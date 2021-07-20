@@ -53,37 +53,32 @@ public class TaskController {
 
 
 
-    @GetMapping("tasks/status")
-    public ResponseEntity<List<Task>> searchStatus(
-            @RequestParam (defaultValue = "false")String status,
+/*
+    @GetMapping("tasks/search")
+    public ResponseEntity<List<TaskJoin>> search(
+            @RequestParam String status,
+            @RequestParam  String project,
+            @RequestParam String priority,
+            @RequestParam String userName,
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize,
-            @RequestParam(defaultValue = "tId") String[] sortby)
+            @RequestParam(defaultValue = "5") Integer pageSize)
     {
-        List<Task> list = taskService.searchStatus(pageNo, pageSize, sortby,status);
+        List<TaskJoin> list = taskService.search(pageNo, pageSize,status,project,priority,userName);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+*/
+    @GetMapping("tasks/search")
+    public ResponseEntity<List<Task>> search(
+            @RequestParam String status,
+            @RequestParam  String project,
+            @RequestParam String priority,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize)
+    {
+        List<Task> list = taskService.search(pageNo, pageSize,status,project,priority);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("tasks/project")
-    public ResponseEntity<List<Task>> searchProject(
-            @RequestParam (defaultValue = "false")String project,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize,
-            @RequestParam(defaultValue = "tId") String[] sort)
-    {
-        List<Task> list = taskService.searchProject(pageNo, pageSize, sort,project);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-    @GetMapping("tasks/priority")
-    public ResponseEntity<List<Task>> searchPriority(
-            @RequestParam (defaultValue = "false")String priority,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize,
-            @RequestParam(defaultValue = "tId") String[] sort)
-    {
-        List<Task> list = taskService.searchPriority(pageNo, pageSize, sort,priority);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
 
     }
 

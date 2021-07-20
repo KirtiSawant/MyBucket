@@ -28,6 +28,7 @@ public class User{
     @NotEmpty(message = "Email is required")
     @Email
     private String email;
+    @Nullable
     private String dob;
      @MappedCollection(keyColumn = "uid",idColumn ="uid")
     private Task tasks;
