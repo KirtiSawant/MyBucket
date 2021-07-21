@@ -32,7 +32,7 @@ public class User{
     @Nullable
     private String dob;
      @MappedCollection(keyColumn = "uid",idColumn ="uid")
-    private Task tasks;
+       private Task tasks;
 
      public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
         this.uid=uid;

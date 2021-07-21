@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -87,10 +89,13 @@ public class TaskService {
           //orders.add(new Sort.Order(getSortDirection().isAscending()));
      // Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "project");
     //   orders.add(order1);
-       // Sort sortOrder = Sort.by("project");
-       //List<Task> list = taskRepository.findAll(sortOrder);
-        Pageable paging = PageRequest.of(pageNo, pageSize,Sort.by("tId").descending().and(Sort.by("project")).descending().
-                                                            and(Sort.by("priority")).ascending());
+       Sort sortOrder = Sort.by("estimatedHour");
+        List<Task> list = taskRepository.findAll(sortOrder);
+       //List<Task> list = taskRepository.findByStatusOrProject(status,project,sort);
+        if (list.isEmpty()) {
+            return list;
+        }
+        Pageable paging = PageRequest.of(pageNo, pageSize,sortOrder);
         Page<Task> pageResult;
         if (status == null  && project==null && priority==null)
             pageResult = taskRepository.findAll(paging);
