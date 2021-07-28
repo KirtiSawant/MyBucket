@@ -24,11 +24,11 @@ public class UserController {
     public User addUser(@RequestBody @Valid User user) {
         return  userService.addUser(user);
 }*/
-@PostMapping("users")
-public ResponseEntity<String> addUser(@RequestBody @Valid User user) {
+    @PostMapping("users")
+    public ResponseEntity<String> addUser(@RequestBody @Valid User user) {
     userService.addUser(user);
     return ResponseEntity.ok("User data is valid");
-}
+        }
     @GetMapping("/user")
     public List<User> getUser() {
         return userService.getUser();
@@ -38,7 +38,6 @@ public ResponseEntity<String> addUser(@RequestBody @Valid User user) {
     public User getUserById(@PathVariable("uid") int uid) {
         return userService.getUserById(uid);
     }
-
 
     @PutMapping("/user/{uid}")
     public User updateUser(@PathVariable("uid") int uid, @RequestBody User user) {

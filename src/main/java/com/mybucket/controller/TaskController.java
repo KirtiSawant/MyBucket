@@ -19,6 +19,7 @@ import java.util.List;
 public class TaskController {
     @Autowired
     TaskService taskService;
+
     @PostMapping(value = "tasks")
     public Task addTask(@Valid @RequestBody Task task) {
         return taskService.addTask(task);
@@ -51,27 +52,25 @@ public class TaskController {
     }
 
 
+    /*
+        @GetMapping("tasks/search")
+        public ResponseEntity<List<TaskJoin>> search(
+                @RequestParam String status,
+                @RequestParam  String project,
+                @RequestParam String priority,
+                @RequestParam String userName,
+                @RequestParam(defaultValue = "0") Integer pageNo,
+                @RequestParam(defaultValue = "5") Integer pageSize)
+        {
+            List<TaskJoin> list = taskService.search(pageNo, pageSize,status,project,priority,userName);
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }*/
 
-
-/*
-    @GetMapping("tasks/search")
-    public ResponseEntity<List<TaskJoin>> search(
-            @RequestParam String status,
-            @RequestParam  String project,
-            @RequestParam String priority,
-            @RequestParam String userName,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize)
-    {
-        List<TaskJoin> list = taskService.search(pageNo, pageSize,status,project,priority,userName);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-*/
     @GetMapping("tasks/search")
     public ResponseEntity<List<Task>> search(
-            @RequestParam String status,
-            @RequestParam  String project,
-            @RequestParam String priority,
+            @RequestParam (value = "status",required = false)String status,
+            @RequestParam  (value = "project",required = false)String project    ,
+            @RequestParam ( value = "priority",required = false)String priority,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer pageSize)
     {
@@ -80,5 +79,6 @@ public class TaskController {
     }
 
 
-    }
+}
 
+         

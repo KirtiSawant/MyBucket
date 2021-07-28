@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -22,19 +23,22 @@ public class User{
     @NotEmpty(message = "First name is required")
     private String firstName;
 
-    @NotNull(message = "NotNull")
+    //@NotNull
     private String lastName;
-
 
     @NotEmpty(message = "Email is required")
     @Email
     private String email;
-    @Nullable
+    @NotNull(message = "{user.birthday.notNull}")
+    //@NotEmpty(message = "Date should be in this format YYYY.MM.DD")
+    @DateTimeFormat(pattern = "YYYY.MM.DD")
     private String dob;
-     @MappedCollection(keyColumn = "uid",idColumn ="uid")
+
+
+      @MappedCollection(keyColumn = "uid",idColumn ="uid")
        private Task tasks;
 
-     public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
+        public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
         this.uid=uid;
         this.userName=userName;
         this.firstName=firstName;
