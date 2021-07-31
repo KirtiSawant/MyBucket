@@ -20,11 +20,10 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @PostMapping(value = "tasks")
+    @PostMapping(value = "task")
     public Task addTask(@Valid @RequestBody Task task) {
         return taskService.addTask(task);
     }
-
 
     @GetMapping("/task/user/{uid}")
     public List<TaskJoin> getTaskForUser(@PathVariable("uid") int uid) {
@@ -66,18 +65,18 @@ public class TaskController {
             return new ResponseEntity<>(list, HttpStatus.OK);
         }*/
 
-    @GetMapping("tasks/search")
+    @GetMapping("task/search")
     public ResponseEntity<List<Task>> search(
-            @RequestParam (value = "status",required = false)String status,
-            @RequestParam  (value = "project",required = false)String project    ,
-            @RequestParam ( value = "priority",required = false)String priority,
+            @RequestParam (value = "status",required=false)String status,
+            @RequestParam (value = "project",required=false)String project,
+            @RequestParam (value = "priority",required=false)String priority,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer pageSize)
+           // @RequestParam (required = false)String sortBy)
     {
         List<Task> list = taskService.search(pageNo, pageSize,status,project,priority);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
 
 }
 

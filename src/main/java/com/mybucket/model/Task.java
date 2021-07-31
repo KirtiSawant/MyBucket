@@ -9,8 +9,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Table("Task")
@@ -20,7 +22,7 @@ public class Task {
     @NotBlank(message = "Description is mandatory")
     private String description;
 
-    //@NotBlank(message = "enum value LOW/HIGH/MEDIUM")
+
     @EnumNamePattern(message = "Must be any of Enum LOW/HIGH/MEDIUM",enumClass =Priority.class)
     private String priority;
 
@@ -29,9 +31,12 @@ public class Task {
 
     @EnumNamePattern(message = "Must be any of Enum PAM/TRAVEL/LMS",enumClass = Project.class)
     private String project;
+
     @NotNull
+    @Min(value=1, message="required")
     private int hourSpent;
-    @NotNull
+
+    @Min(value=1, message="required")
     private int estimatedHour;
   //  @MappedCollection(keyColumn = "uid",idColumn ="uid")
        private int uid;
@@ -82,14 +87,6 @@ public class Task {
         this.priority = priority;
     }
 
-    /* public Priority getPriority() {
-            return priority;
-        }
-
-        public void setPriority(Priority priority) {
-            this.priority = priority;
-        }
-    */
     public String  getStatus() {
         return status;
     }

@@ -3,15 +3,12 @@ package com.mybucket.controller;
 import com.mybucket.model.User;
 import com.mybucket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @Validated
@@ -19,12 +16,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
-/*
-    @PostMapping("/users")
-    public User addUser(@RequestBody @Valid User user) {
-        return  userService.addUser(user);
-}*/
-    @PostMapping("users")
+
+    @PostMapping("user")
     public ResponseEntity<String> addUser(@RequestBody @Valid User user) {
     userService.addUser(user);
     return ResponseEntity.ok("User data is valid");

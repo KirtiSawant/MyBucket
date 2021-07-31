@@ -28,11 +28,21 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
 
     Page<Task> findByStatusAndProjectAndPriority(String status, String project, String priority, Pageable paging);
 
-    List<Task> findByStatusOrProject(String status, String project, String sort);
+   // List<Task> findByStatusAndProject(String status, String project, Pageable paging);
 
     List<Task> findByStatusAndProjectAndPriority(String status, String project, String priority);
 
     Page<Task> findByStatusAndProject(String status, String project, Pageable paging);
+
+    Page<Task> findByStatusAndPriority(String status, String priority, Pageable paging);
+
+    Page<Task> findByProjectAndPriority(String project, String priority, Pageable paging);
+
+    Page<Task> findByProject(String project, Pageable paging);
+
+    Page<Task> findByPriority(String priority, Pageable paging);
+
+    Page<Task> findByStatus(String status, Pageable paging);
 
 
     //@Query(value = "SELECT t.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour from user u INNER JOIN task t ON u.uid=t.uid")

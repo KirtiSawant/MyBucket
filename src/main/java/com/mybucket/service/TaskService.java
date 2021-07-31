@@ -87,18 +87,54 @@ public class TaskService {
         //orders.add(new Sort.Order(getSortDirection().isAscending()));
         // Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "project");
         //   orders.add(order1);
-        Sort sortOrder = Sort.by("estimatedHour");
-        List<Task> list = taskRepository.findAll(sortOrder);
+        //Sort sortOrder = Sort.by(sortBy);
+        // List<Task> list = taskRepository.findAll(sortOrder);
         //List<Task> list = taskRepository.findByStatusOrProject(status,project,sort);
-        if (list.isEmpty()) {
-            return list;
-        }
-        Pageable paging = PageRequest.of(pageNo, pageSize, sortOrder);
+        //  if (list.isEmpty()) {
+        //     return list;
+        //  }
+          /*
+        Pageable paging = PageRequest.of(pageNo, pageSize);
         Page<Task> pageResult;
-        if (status !=null && project != null && priority == null)
+        if (status ==null && project == null && priority == null)
             pageResult = taskRepository.findAll(paging);
         else
             pageResult = taskRepository.findByStatusAndProjectAndPriority(status, project, priority, paging);
+
+
+        if (pageResult.hasContent()) {
+            return pageResult.getContent();
+        } else {
+            return new ArrayList<Task>();
+        }*/
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Page<Task> pageResult;
+        if(status!=null && project!=null && priority!=null)
+            pageResult = taskRepository.findByStatusAndProjectAndPriority(status, project, priority, paging);
+
+        else if(status!=null && project!=null && priority==null)
+            pageResult = taskRepository.findByStatusAndProject(status,project,paging);
+
+        else if(status!=null && priority!=null && project==null)
+            pageResult = taskRepository.findByStatusAndPriority(status,priority,paging);
+
+        else if(project!=null && priority!=null && status==null)
+            pageResult = taskRepository.findByProjectAndPriority(project,priority,paging);
+
+        else if(project!=null && priority==null && status==null)
+            pageResult = taskRepository.findByProject(project,paging);
+
+        else if(project==null && priority!=null && status==null)
+            pageResult = taskRepository.findByPriority(priority,paging);
+
+        else if(project==null && priority==null && status!=null)
+            pageResult = taskRepository.findByStatus(status,paging);
+
+
+
+        else
+
+            pageResult = taskRepository.findAll(paging);
 
         if (pageResult.hasContent()) {
             return pageResult.getContent();
@@ -106,7 +142,6 @@ public class TaskService {
             return new ArrayList<Task>();
         }
     }
-
 
 }
 

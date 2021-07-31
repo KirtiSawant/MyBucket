@@ -13,7 +13,6 @@ public class UserService {
     UserRepository userRepository;
 
     public User addUser(User user) {
-
         return userRepository.save(user);
     }
     public List<User> getUser() {
@@ -22,7 +21,6 @@ public class UserService {
     public User getUserById(int uid){
         return userRepository.findById(uid).get();
     }
-
     public User updateUser (int uid,User user){
         user.setUid(uid);
         return   userRepository.save(user);

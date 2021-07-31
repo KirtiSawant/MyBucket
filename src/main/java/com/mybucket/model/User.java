@@ -1,15 +1,14 @@
 package com.mybucket.model;
 
-import com.mybucket.model.Task;
+
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.Nullable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Data
 @Table("User")
@@ -23,20 +22,18 @@ public class User{
     @NotEmpty(message = "First name is required")
     private String firstName;
 
-    //@NotNull
+    @NotEmpty(message = "last name is required")
     private String lastName;
 
     @NotEmpty(message = "Email is required")
     @Email
     private String email;
-    @NotNull(message = "{user.birthday.notNull}")
-    //@NotEmpty(message = "Date should be in this format YYYY.MM.DD")
-    @DateTimeFormat(pattern = "YYYY.MM.DD")
+
+    @NotEmpty(message = "Please use yyyy.MM.DD format")
     private String dob;
 
-
-      @MappedCollection(keyColumn = "uid",idColumn ="uid")
-       private Task tasks;
+    @MappedCollection(keyColumn = "uid",idColumn ="uid")
+    private Task tasks;
 
         public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
         this.uid=uid;
