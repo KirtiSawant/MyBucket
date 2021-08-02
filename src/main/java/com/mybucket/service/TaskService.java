@@ -22,7 +22,15 @@ import java.util.List;
 public class TaskService {
     @Autowired
     TaskRepository taskRepository;
+    private Sort.Direction getSortDirection(String direction) {
+        if (direction.equals("asc")) {
+            return Sort.Direction.ASC;
+        } else if (direction.equals("desc")) {
+            return Sort.Direction.DESC;
+        }
 
+        return Sort.Direction.ASC;
+    }
 
     //  @Autowired
     //  UserRepository userRepository;
@@ -65,49 +73,21 @@ public class TaskService {
         return taskRepository.sumByStatus(status);
     }
 
-/*
-    public List<TaskJoin> search(Integer pageNo, Integer pageSize,String status ,String project,String priority,String userName) {
-       // List<TaskJoin> task = new ArrayList<TaskJoin>();
-        Pageable paging = PageRequest.of(pageNo, pageSize);
-        Page<TaskJoin> pageResult;
-        if (status == null  && project==null && priority==null && userName==null)
-            pageResult =  taskRepository.findAllBy(paging);
-        else
-            pageResult = (Page<TaskJoin>) taskRepository.findByStatusAndProjectAndPriorityAndUserName(status, project,priority,userName,paging);
-
-        //if (pageResult.hasContent()) {
-            return pageResult.getContent();
-       
-    }
-*/
 
 
-    public List<Task> search(Integer pageNo, Integer pageSize, String status, String project, String priority) {
-        // List<Sort.Order> orders = new ArrayList<Sort.Order>();
-        //orders.add(new Sort.Order(getSortDirection().isAscending()));
-        // Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "project");
-        //   orders.add(order1);
-        //Sort sortOrder = Sort.by(sortBy);
-        // List<Task> list = taskRepository.findAll(sortOrder);
-        //List<Task> list = taskRepository.findByStatusOrProject(status,project,sort);
-        //  if (list.isEmpty()) {
-        //     return list;
-        //  }
-          /*
-        Pageable paging = PageRequest.of(pageNo, pageSize);
-        Page<Task> pageResult;
-        if (status ==null && project == null && priority == null)
-            pageResult = taskRepository.findAll(paging);
-        else
-            pageResult = taskRepository.findByStatusAndProjectAndPriority(status, project, priority, paging);
-
-
-        if (pageResult.hasContent()) {
-            return pageResult.getContent();
+    public List<Task> search(Integer pageNo, Integer pageSize, String status, String project, String priority,String[] sortBy) {
+        List<Sort.Order> orders = new ArrayList<Sort.Order>();
+        if (sortBy[0].contains(",")) {
+            for (String sortOrder : sortBy) {
+                String[] _sort = sortOrder.split(",");
+                orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
+            }
         } else {
-            return new ArrayList<Task>();
-        }*/
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+
+            orders.add(new Sort.Order(getSortDirection(sortBy[1]), sortBy[0]));
+        }
+
+        Pageable paging = PageRequest.of(pageNo, pageSize,Sort.by(orders));
         Page<Task> pageResult;
         if(status!=null && project!=null && priority!=null)
             pageResult = taskRepository.findByStatusAndProjectAndPriority(status, project, priority, paging);
@@ -130,10 +110,7 @@ public class TaskService {
         else if(project==null && priority==null && status!=null)
             pageResult = taskRepository.findByStatus(status,paging);
 
-
-
         else
-
             pageResult = taskRepository.findAll(paging);
 
         if (pageResult.hasContent()) {

@@ -26,11 +26,7 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
     List<GroupUser> sumByStatus(String status);
     //Page<Task>findAll(Pageable pageable);
 
-    Page<Task> findByStatusAndProjectAndPriority(String status, String project, String priority, Pageable paging);
-
-   // List<Task> findByStatusAndProject(String status, String project, Pageable paging);
-
-    List<Task> findByStatusAndProjectAndPriority(String status, String project, String priority);
+    Page<Task> findByStatusAndProjectAndPriority(String status, String project, String priority,Pageable paging);
 
     Page<Task> findByStatusAndProject(String status, String project, Pageable paging);
 

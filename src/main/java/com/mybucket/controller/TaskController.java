@@ -51,19 +51,6 @@ public class TaskController {
     }
 
 
-    /*
-        @GetMapping("tasks/search")
-        public ResponseEntity<List<TaskJoin>> search(
-                @RequestParam String status,
-                @RequestParam  String project,
-                @RequestParam String priority,
-                @RequestParam String userName,
-                @RequestParam(defaultValue = "0") Integer pageNo,
-                @RequestParam(defaultValue = "5") Integer pageSize)
-        {
-            List<TaskJoin> list = taskService.search(pageNo, pageSize,status,project,priority,userName);
-            return new ResponseEntity<>(list, HttpStatus.OK);
-        }*/
 
     @GetMapping("task/search")
     public ResponseEntity<List<Task>> search(
@@ -71,10 +58,10 @@ public class TaskController {
             @RequestParam (value = "project",required=false)String project,
             @RequestParam (value = "priority",required=false)String priority,
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize)
-           // @RequestParam (required = false)String sortBy)
+            @RequestParam(defaultValue = "5") Integer pageSize,
+            @RequestParam (required = false)String[] sortBy)
     {
-        List<Task> list = taskService.search(pageNo, pageSize,status,project,priority);
+        List<Task> list = taskService.search(pageNo, pageSize,status,project,priority,sortBy);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
