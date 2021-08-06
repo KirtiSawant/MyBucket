@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -118,8 +116,21 @@ public class TaskService {
         } else {
             return new ArrayList<Task>();
         }
-    }
+    }/*
+    public List<Task> search(Integer pageNo, Integer pageSize, String status , String project, String priority, String userName) {
+         List<TaskJoin> task = new ArrayList<TaskJoin>();
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Page<TaskJoin> pageResult;
+        if (status == null  && project==null && priority==null && userName==null)
+            pageResult =  taskRepository.findAll(paging);
+        else
+            pageResult = (Page<TaskJoin>) taskRepository.findByStatusAndProjectAndPriorityAndUserName(status, project,priority,userName,paging);
 
+        //if (pageResult.hasContent()) {
+        return pageResult.getContent();
+
+    }
+*/
 }
 
 
