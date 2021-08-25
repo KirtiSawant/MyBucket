@@ -1,10 +1,7 @@
 package com.mybucket.repository;
 
 import com.mybucket.model.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -40,9 +37,12 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
 
     Page<Task> findByStatus(String status, Pageable paging);
 
-    @Query(value = "SELECT t.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour from user u INNER JOIN task t ON u.uid=t.uid")
-    Page<TaskJoin> findByStatusAndProjectAndPriorityAndUserName(String status, String project, String priority, String userName, Pageable paging);
+   @Query(value = "SELECT t.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour from user u INNER JOIN task t ON u.uid=t.uid")
+    List<TaskJoin> findByStatusAndProjectAndPriorityAndUserName(String status, String project, String priority, String userName, Pageable paging);
     //@Query(value = "SELECT t.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour from user u INNER JOIN task t ON u.uid=t.uid")
    //Page<TaskJoin> findByStatusAndProjectAndPriorityAndUserName(String status, String project, String priority, String userName, Pageable sort);
+    Page<TaskJoin> findAllBy(Pageable paging);
+
+
 
 }

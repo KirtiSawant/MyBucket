@@ -63,19 +63,11 @@ public class TaskController {
         List<Task> list = taskService.search(pageNo, pageSize,status,project,priority,sortBy);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-/*
-    @GetMapping("tasks/search")
-    public ResponseEntity<List<TaskJoin>> search(
-            @RequestParam String status,
-            @RequestParam  String project,
-            @RequestParam String priority,
-            @RequestParam String userName,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize)
-    {
-        List<TaskJoin> list = taskService.search(pageNo, pageSize,status,project,priority,userName);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }*/
+
+
+
+
+
 
 }
 
