@@ -1,8 +1,10 @@
 package com.mybucket.controller;
 
+import com.mybucket.dto.StatusResponse;
 import com.mybucket.model.GroupUser;
 import com.mybucket.model.Task;
 import com.mybucket.model.TaskJoin;
+import com.mybucket.model.User;
 import com.mybucket.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ public class TaskController {
 
     @PostMapping(value = "task")
     public Task addTask(@Valid @RequestBody Task task) {
+        System.out.println(task);
         return taskService.addTask(task);
     }
 
@@ -50,7 +53,6 @@ public class TaskController {
         return taskService.getEstimatedHours(status);
     }
 
-
     @GetMapping("task/search")
     public ResponseEntity<List<Task>> search(
             @RequestParam (value = "status",required=false)String status,
@@ -63,8 +65,6 @@ public class TaskController {
         List<Task> list = taskService.search(pageNo, pageSize,status,project,priority,sortBy);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
-
 
 
 

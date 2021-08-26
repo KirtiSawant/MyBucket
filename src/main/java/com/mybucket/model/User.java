@@ -29,11 +29,11 @@ public class User{
     @Email
     private String email;
 
-    @NotEmpty(message = "Please use yyyy.MM.DD format")
+    @NotEmpty(message = "Please use YYYY.MM.DD format")
     private String dob;
 
-    @MappedCollection(keyColumn = "uid",idColumn ="uid")
-    private Task tasks;
+   // @MappedCollection(keyColumn = "uid",idColumn ="uid")
+   /* private Task tasks;*/
 
         public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
         this.uid=uid;
@@ -42,7 +42,7 @@ public class User{
         this.lastName=lastName;
         this.email=email;
         this.dob=dob;
-        this.tasks=tasks;
+        /*this.tasks=tasks;*/
     }
     public User() {
     }
@@ -95,11 +95,11 @@ public class User{
         this.dob = dob;
     }
 
-    public Task getTasks() {
+   /* public Task getTasks() {
         return tasks;
     }
 
     public void setTasks(Task tasks) {
         this.tasks = tasks;
-    }
+    }*/
 }

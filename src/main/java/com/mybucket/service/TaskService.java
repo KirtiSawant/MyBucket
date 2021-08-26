@@ -1,18 +1,18 @@
 package com.mybucket.service;
 
 
+import com.mybucket.dto.StatusResponse;
 import com.mybucket.model.*;
+import com.mybucket.repository.SprintRepository;
 import com.mybucket.repository.TaskRepository;
+import com.mybucket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -29,19 +29,23 @@ public class TaskService {
         return Sort.Direction.ASC;
     }
 
-    //  @Autowired
-    //  UserRepository userRepository;
+      @Autowired
+      UserRepository userRepository;
+     @Autowired
+     SprintRepository sprintRepository;
 
     public Task addTask(Task task) {
         //  User user = new User();
         //  user.setTask(task);
-     /*   User user2 = task.getUid();
+
+        /*    User user2 = task.getUsers();
         if(user2 != null){
             int uid = 1;
             Optional<User> user=userRepository.findById(uid);
             if(user.isPresent()){
-                task.setUid(user.get());
+                task.setUsers(user.get());
             }
+
         }*/
         return taskRepository.save(task);
     }
@@ -116,7 +120,6 @@ public class TaskService {
             return new ArrayList<Task>();
         }
     }
-
 
 }
 

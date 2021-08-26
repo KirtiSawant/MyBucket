@@ -17,3 +17,25 @@ uid INT,
 FOREIGN KEY(uid)
 REFERENCES User(uid)
 );
+
+CREATE Table Sprint(id int Auto_increment NOT NULL PRIMARY KEY,
+name VARCHAR(100),
+description VARCHAR(100),
+start_date DATE,
+end_date DATE,
+);
+
+CREATE TABLE Task(
+t_id INTEGER NOT NULL auto_increment,
+description VARCHAR(30),
+priority enum('LOW','HIGH','MEDIUM'),
+status enum('TO_DO','IN_PROGRESS','DONE'),
+project enum('PAM','LMS','TRAVEL'),
+hour_spent int,
+estimated_hour int,
+s_id INTEGER,
+u_id INTEGER,
+FOREIGN KEY(s_id) REFERENCES Task(t_id),
+PRIMARY KEY(t_id),
+FOREIGN KEY(u_id) REFERENCES User(uid)
+);

@@ -6,12 +6,14 @@ import com.mybucket.enums.Status;
 import com.mybucket.validation.EnumNamePattern;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 
 @Data
@@ -38,15 +40,15 @@ public class Task {
 
     @Min(value=1, message="required")
     private int estimatedHour;
-  //  @MappedCollection(keyColumn = "uid",idColumn ="uid")
-       private int uid;
-    
-    public int getUid() {
-        return uid;
-    }
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
+    @MappedCollection(keyColumn ="sid",idColumn ="sid")
+    private Sprint sprint;
+    @MappedCollection(keyColumn = "uid",idColumn ="uid")
+    private User users;
+   /* @MappedCollection(keyColumn = "uid",idColumn ="uid")
+    private int uid;
+    @MappedCollection(keyColumn ="sid",idColumn ="sid")
+    private int sid;*/
+
     public int gettId() {
         return tId;
     }
@@ -103,17 +105,49 @@ public class Task {
         this.project = project;
     }
 
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
+
+   /* public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }*/
+
     @Override
     public String toString() {
         return "Task{" +
                 "tId=" + tId +
                 ", description='" + description + '\'' +
-                ", priority=" + priority +
-                ", status=" + status +
-                ", project=" + project +
+                ", priority='" + priority + '\'' +
+                ", status='" + status + '\'' +
+                ", project='" + project + '\'' +
                 ", hourSpent=" + hourSpent +
                 ", estimatedHour=" + estimatedHour +
-                ", uid=" + uid +
+
                 '}';
     }
 }

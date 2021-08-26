@@ -1,5 +1,6 @@
 package com.mybucket.repository;
 
+import com.mybucket.dto.StatusResponse;
 import com.mybucket.model.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -43,6 +44,6 @@ public interface TaskRepository extends PagingAndSortingRepository<Task,Integer>
    //Page<TaskJoin> findByStatusAndProjectAndPriorityAndUserName(String status, String project, String priority, String userName, Pageable sort);
     Page<TaskJoin> findAllBy(Pageable paging);
 
-
-
+    //@Query("select * from task ")
+    StatusResponse findAllByStatus(String status);
 }
