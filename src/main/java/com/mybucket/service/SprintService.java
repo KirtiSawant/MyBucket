@@ -1,6 +1,7 @@
 package com.mybucket.service;
 
 import com.mybucket.dto.StatusResponse;
+import com.mybucket.dto.UserResponse;
 import com.mybucket.exception.SprintNotFoundException;
 import com.mybucket.model.Sprint;
 import com.mybucket.repository.SprintRepository;
@@ -37,11 +38,12 @@ public class SprintService {
         return "Sprint sid";
     }
 
-
     public List<StatusResponse> searchSprint(String status) {
         return (List<StatusResponse>) sprintRepository.findByStatus(status);
     }
 
-
+    public List<UserResponse> searchUserName(String userName) {
+        return sprintRepository.findByUserName(userName);
     }
+}
 

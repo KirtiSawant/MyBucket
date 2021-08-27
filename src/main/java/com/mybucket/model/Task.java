@@ -40,10 +40,10 @@ public class Task {
 
     @Min(value=1, message="required")
     private int estimatedHour;
-    @MappedCollection(keyColumn ="sid",idColumn ="sid")
+   /* @MappedCollection(keyColumn ="sid",idColumn ="sid")
     private Sprint sprint;
     @MappedCollection(keyColumn = "uid",idColumn ="uid")
-    private User users;
+    private User users;*/
    /* @MappedCollection(keyColumn = "uid",idColumn ="uid")
     private int uid;
     @MappedCollection(keyColumn ="sid",idColumn ="sid")
@@ -105,7 +105,7 @@ public class Task {
         this.project = project;
     }
 
-    public Sprint getSprint() {
+    /*public Sprint getSprint() {
         return sprint;
     }
 
@@ -119,7 +119,7 @@ public class Task {
 
     public void setUsers(User users) {
         this.users = users;
-    }
+    }*/
    /* public int getUid() {
         return uid;
     }

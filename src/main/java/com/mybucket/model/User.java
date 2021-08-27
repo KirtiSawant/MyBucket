@@ -3,6 +3,7 @@ package com.mybucket.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,7 +18,7 @@ import java.util.Set;
 public class User{
     @Id
     private int uid;
-
+    @Column("user_name")
     @NotEmpty(message = "User Name is mandatory")
     private String userName;
 

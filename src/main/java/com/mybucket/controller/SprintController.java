@@ -2,6 +2,7 @@ package com.mybucket.controller;
 
 import com.mybucket.dto.SprintDto;
 import com.mybucket.dto.StatusResponse;
+import com.mybucket.dto.UserResponse;
 import com.mybucket.model.Sprint;
 import com.mybucket.service.SprintService;
 import org.modelmapper.ModelMapper;
@@ -74,5 +75,8 @@ public class SprintController {
         return sprintService.getTask();
     }
 
-
+    @GetMapping("sprint/userName")
+    public List<UserResponse> searchUserName(@RequestParam String userName){
+        return sprintService.searchUserName(userName);
+    }
 }
