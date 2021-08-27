@@ -23,6 +23,20 @@ public class StatusResponse {
     private Date startDate;
     private Date endDate;
 
+    public StatusResponse(int tId, String description, Priority priority, Status status, Project project, int hourSpent, int estimatedHour, int sid, String name, Date startDate, Date endDate) {
+        this.tId = tId;
+        this.description = description;
+        this.priority = priority;
+        this.status = status;
+        this.project = project;
+        this.hourSpent = hourSpent;
+        this.estimatedHour = estimatedHour;
+        this.sid = sid;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public int gettId() {
         return tId;
     }
@@ -79,13 +93,6 @@ public class StatusResponse {
         this.estimatedHour = estimatedHour;
     }
 
-    public int getSid() {
-        return sid;
-    }
-
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
 
     public String getName() {
         return name;

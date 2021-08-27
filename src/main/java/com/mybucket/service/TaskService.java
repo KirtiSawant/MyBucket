@@ -38,8 +38,8 @@ public class TaskService {
         //  User user = new User();
         //  user.setTask(task);
 
-        /*    User user2 = task.getUsers();
-        if(user2 != null){
+          /*  User users = task.getUsers();
+        if(users != null){
             int uid = 1;
             Optional<User> user=userRepository.findById(uid);
             if(user.isPresent()){

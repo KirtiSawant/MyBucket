@@ -7,6 +7,8 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class Sprint {
@@ -19,15 +21,17 @@ public class Sprint {
     private Date startDate;
     private Date endDate;
     @MappedCollection(keyColumn ="sid",idColumn ="sid")
-    private Task tasks;
+  //  private Task tasks;
+    Set<Task> tasks= new HashSet<>();
 
-    public Sprint(int sid, String name, String description, Date startDate, Date endDate, Task tasks) {
+    public Sprint(int sid, String name, String description, Date startDate, Date endDate, Set<Task> tasks1) {
         this.sid = sid;
         this.name = name;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        /*this.tasks = tasks;*/
+
+
     }
 
     public int getSid() {
@@ -68,6 +72,14 @@ public class Sprint {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Sprint() {

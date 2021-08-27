@@ -8,6 +8,8 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -32,18 +34,19 @@ public class User{
     @NotEmpty(message = "Please use YYYY.MM.DD format")
     private String dob;
 
-   // @MappedCollection(keyColumn = "uid",idColumn ="uid")
-   /* private Task tasks;*/
+    @MappedCollection(keyColumn = "uid",idColumn ="uid")
+    Set<Task> tasks= new HashSet<>();
 
-        public  User(int uid,String userName,String firstName,String lastName,String email,String dob,Task tasks){
-        this.uid=uid;
-        this.userName=userName;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.email=email;
-        this.dob=dob;
-        /*this.tasks=tasks;*/
+    public User(int uid, String userName, String firstName, String lastName, String email, String dob, Set<Task> tasks) {
+        this.uid = uid;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.dob = dob;
+        this.tasks = tasks;
     }
+
     public User() {
     }
 
@@ -95,11 +98,11 @@ public class User{
         this.dob = dob;
     }
 
-   /* public Task getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Task tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
-    }*/
+    }
 }

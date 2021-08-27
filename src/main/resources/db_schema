@@ -22,7 +22,7 @@ CREATE Table Sprint(id int Auto_increment NOT NULL PRIMARY KEY,
 name VARCHAR(100),
 description VARCHAR(100),
 start_date DATE,
-end_date DATE,
+end_date DATE
 );
 
 CREATE TABLE Task(

@@ -49,7 +49,6 @@ public class SprintController {
                 .collect(Collectors.toList());
     }
 
-
     @GetMapping("/sprint/{sid}")
     public Sprint getSprintById(@PathVariable("sid") int sid) {
         return sprintService.getSprintById(sid);

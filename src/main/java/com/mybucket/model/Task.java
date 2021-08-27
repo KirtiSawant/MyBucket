@@ -120,7 +120,6 @@ public class Task {
     public void setUsers(User users) {
         this.users = users;
     }
-
    /* public int getUid() {
         return uid;
     }
