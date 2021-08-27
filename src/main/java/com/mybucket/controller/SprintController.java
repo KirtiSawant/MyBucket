@@ -63,6 +63,7 @@ public class SprintController {
     }
 
     /*   Additional API   */
+
    @GetMapping("sprint/status")
     public List<StatusResponse> searchSprint(@RequestParam String status){
        return sprintService.searchSprint(status);

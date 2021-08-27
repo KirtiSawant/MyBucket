@@ -17,7 +17,6 @@ public class SprintService {
 
     public Sprint createSprint(Sprint sprint) {
         return sprintRepository.save(sprint);
-
     }
     public List<Sprint> getAllSprint() {
         return (List<Sprint>) sprintRepository.findAll();
@@ -29,13 +28,10 @@ public class SprintService {
     public Sprint getSprintById(int sid) {
         return sprintRepository.findById(sid).orElseThrow(() -> new SprintNotFoundException(sid));
     }
-
     public Sprint updateSprint(int sid, Sprint sprint) {
         sprint.setSid(sid);
         return   sprintRepository.save(sprint);
-
     }
-
     public String deleteSprint(int sid) {
         sprintRepository.deleteById(sid);
         return "Sprint sid";
