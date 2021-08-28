@@ -1,6 +1,7 @@
 package com.mybucket.controller;
 
 import com.mybucket.dto.SprintDto;
+import com.mybucket.dto.SprintResponce;
 import com.mybucket.dto.StatusResponse;
 import com.mybucket.dto.UserResponse;
 import com.mybucket.model.Sprint;
@@ -69,7 +70,6 @@ public class SprintController {
     public List<StatusResponse> searchSprint(@RequestParam String status){
        return sprintService.searchSprint(status);
    }
-
     @GetMapping("sprint/task")
     public List<Sprint> getTask(){
         return sprintService.getTask();
@@ -78,5 +78,9 @@ public class SprintController {
     @GetMapping("sprint/userName")
     public List<UserResponse> searchUserName(@RequestParam String userName){
         return sprintService.searchUserName(userName);
+    }
+    @GetMapping("sprint/statusCount")
+    public List<SprintResponce> getStatus(@RequestParam String status){
+       return sprintService.getstatus(status);
     }
 }

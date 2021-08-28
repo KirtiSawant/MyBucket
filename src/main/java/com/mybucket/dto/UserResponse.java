@@ -7,14 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponse {
 
-    private int uid;
+    private String name;
     private String userName;
-    private int tId;
     private String description;
     private Priority priority;
     private Status status;
