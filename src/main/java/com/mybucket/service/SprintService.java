@@ -38,8 +38,8 @@ public class SprintService {
         return "Sprint sid";
     }
 
-    public List<StatusResponse> searchSprint(String status) {
-        return (List<StatusResponse>) sprintRepository.findByStatus(status);
+    public StatusResponse searchSprint(int sid,String status) {
+        return  sprintRepository.findByStatus(status).get(sid);
     }
 
     public List<UserResponse> searchUserName(String userName) {

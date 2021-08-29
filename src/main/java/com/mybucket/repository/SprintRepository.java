@@ -14,7 +14,7 @@ import java.util.List;
 public interface SprintRepository extends CrudRepository<Sprint,Integer> {
 
     List<Sprint> findAll();
-    @Query(value = "SELECT s.name,s.description,s.start_date,s.end_date,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour FROM task t JOIN sprint s ON t.sid=t.t_id where t.status=:status")
+    @Query(value = "SELECT s.sid,s.name,s.description,s.start_date,s.end_date,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour FROM task t JOIN sprint s ON t.sid=t.t_id where t.status=:status")
     List<StatusResponse> findByStatus(String status);
 
    // @Query(" SELECT u.uid,t.t_id,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour FROM task t JOIN user u ON u.uid=t.t_id where user_name=:user_name")

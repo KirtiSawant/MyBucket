@@ -63,9 +63,9 @@ public class SprintController {
 
     /*   Additional API   */
 
-   @GetMapping("sprint/status")
-    public List<StatusResponse> searchSprint(@RequestParam String status){
-       return sprintService.searchSprint(status);
+   @GetMapping("sprint/{sid}/status")
+    public StatusResponse searchSprint(@PathVariable("sid") int sid,@RequestParam String status){
+       return sprintService.searchSprint(sid,status);
    }
     @GetMapping("sprint/task")
     public List<Sprint> getTask(){
