@@ -1,9 +1,6 @@
 package com.mybucket.controller;
 
-import com.mybucket.dto.SprintDto;
-import com.mybucket.dto.SprintResponce;
-import com.mybucket.dto.StatusResponse;
-import com.mybucket.dto.UserResponse;
+import com.mybucket.dto.*;
 import com.mybucket.model.Sprint;
 import com.mybucket.service.SprintService;
 import org.modelmapper.ModelMapper;
@@ -77,10 +74,11 @@ public class SprintController {
 
     @GetMapping("sprint/userName")
     public List<UserResponse> searchUserName(@RequestParam String userName){
-        return sprintService.searchUserName(userName);
+        return sprintService.searchUserName(userName).stream().map(sprint -> modelMapper.map(sprint, UserResponse.class))
+                .collect(Collectors.toList());
     }
     @GetMapping("sprint/statusCount")
-    public List<SprintResponce> getStatus(@RequestParam String status){
+    public List<SprintResponse> getStatus(@RequestParam String status){
        return sprintService.getstatus(status);
     }
 }

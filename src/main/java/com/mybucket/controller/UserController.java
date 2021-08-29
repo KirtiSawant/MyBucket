@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping("user")
     public ResponseEntity<String> addUser(@RequestBody @Valid User user) {
     userService.addUser(user);
-    return ResponseEntity.ok("User data is valid");
+    return ResponseEntity.ok("User created successfully");
         }
     @GetMapping("/user")
     public List<User> getUser() {

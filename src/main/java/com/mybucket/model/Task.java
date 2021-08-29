@@ -44,10 +44,10 @@ public class Task {
     private Sprint sprint;
     @MappedCollection(keyColumn = "uid",idColumn ="uid")
     private User users;*/
-   /* @MappedCollection(keyColumn = "uid",idColumn ="uid")
+    @MappedCollection(keyColumn = "uid",idColumn ="uid")
     private int uid;
     @MappedCollection(keyColumn ="sid",idColumn ="sid")
-    private int sid;*/
+    private int sid;
 
     public int gettId() {
         return tId;
@@ -120,7 +120,7 @@ public class Task {
     public void setUsers(User users) {
         this.users = users;
     }*/
-   /* public int getUid() {
+    public int getUid() {
         return uid;
     }
 
@@ -134,7 +134,7 @@ public class Task {
 
     public void setSid(int sid) {
         this.sid = sid;
-    }*/
+    }
 
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 public class StatusResponse {
-
+    private int sid;
     private String name;
     private Date startDate;
     private Date endDate;

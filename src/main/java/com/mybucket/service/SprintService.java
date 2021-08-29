@@ -1,6 +1,6 @@
 package com.mybucket.service;
 
-import com.mybucket.dto.SprintResponce;
+import com.mybucket.dto.SprintResponse;
 import com.mybucket.dto.StatusResponse;
 import com.mybucket.dto.UserResponse;
 import com.mybucket.exception.SprintNotFoundException;
@@ -9,7 +9,6 @@ import com.mybucket.repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -47,7 +46,7 @@ public class SprintService {
         return sprintRepository.findByUserName(userName);
     }
 
-    public List<SprintResponce> getstatus(String status) {
+    public List<SprintResponse> getstatus(String status) {
         return sprintRepository.findAllByStatus(status);
     }
 }

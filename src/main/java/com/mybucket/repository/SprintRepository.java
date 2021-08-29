@@ -1,10 +1,9 @@
 package com.mybucket.repository;
 
-import com.mybucket.dto.SprintResponce;
+import com.mybucket.dto.SprintResponse;
 import com.mybucket.dto.StatusResponse;
 import com.mybucket.dto.UserResponse;
 import com.mybucket.model.Sprint;
-import com.mybucket.model.Task;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -24,6 +23,6 @@ public interface SprintRepository extends CrudRepository<Sprint,Integer> {
     List<UserResponse> findByUserName(String user_name);
 
    // @Query("select s.sid,t.t_id,s.name,COUNT(t.status) AS status from task t join sprint s  on t.t_id=t.sid where t.status=:status")
-    @Query("SELECT s.sid,s.name, count(t.status) status FROM  sprint s  INNER JOIN task t USING (sid) where status=:status")
-    List<SprintResponce> findAllByStatus(String status);
+    @Query("SELECT s.sid,s.name, count(t.status) as statuscount FROM  sprint s  INNER JOIN task t USING (sid) where t.status=:status")
+    List<SprintResponse> findAllByStatus(String status);
 }
