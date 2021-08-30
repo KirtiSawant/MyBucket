@@ -48,9 +48,19 @@ public class SprintController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/sprint/{sid}")
+   /* @GetMapping("/sprint/{sid}")
     public Sprint getSprintById(@PathVariable("sid") int sid) {
         return sprintService.getSprintById(sid);
+    }*/
+
+    @GetMapping("sprint/{sid}")
+    public ResponseEntity<SprintDto> getSprintById(@PathVariable(name = "sid") int sid) {
+        Sprint sprint = sprintService.getSprintById(sid);
+
+        // convert entity to DTO
+        SprintDto sprintResponse = modelMapper.map(sprint, SprintDto.class);
+
+        return ResponseEntity.ok().body(sprintResponse);
     }
     @PutMapping("/sprint/{sid}")
     public Sprint updateSprint(@PathVariable("sid") int sid, @RequestBody Sprint sprint) {
@@ -63,9 +73,9 @@ public class SprintController {
 
     /*   Additional API   */
 
-   @GetMapping("sprint/{sid}/status")
-    public StatusResponse searchSprint(@PathVariable("sid") int sid,@RequestParam String status){
-       return sprintService.searchSprint(sid,status);
+   @GetMapping("sprint/status/name")
+    public List<StatusResponse> searchSprint(@RequestParam String status,@RequestParam String name){
+       return sprintService.searchSprint(status,name);
    }
     @GetMapping("sprint/task")
     public List<Sprint> getTask(){
@@ -73,8 +83,8 @@ public class SprintController {
     }
 
     @GetMapping("sprint/userName")
-    public List<UserResponse> searchUserName(@RequestParam String userName){
-        return sprintService.searchUserName(userName).stream().map(sprint -> modelMapper.map(sprint, UserResponse.class))
+    public List<UserResponse> searchUserName(@RequestParam String userName,String name){
+        return sprintService.searchUserName(userName,name).stream().map(sprint -> modelMapper.map(sprint, UserResponse.class))
                 .collect(Collectors.toList());
     }
     @GetMapping("sprint/statusCount")

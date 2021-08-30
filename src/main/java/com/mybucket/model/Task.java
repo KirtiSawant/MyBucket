@@ -44,10 +44,11 @@ public class Task {
     private Sprint sprint;
     @MappedCollection(keyColumn = "uid",idColumn ="uid")
     private User users;*/
-    @MappedCollection(keyColumn = "uid",idColumn ="uid")
+   // @MappedCollection(keyColumn ="sid",idColumn ="sid")
+   private int sid;
+  //  @MappedCollection(keyColumn = "uid",idColumn ="uid")
     private int uid;
-    @MappedCollection(keyColumn ="sid",idColumn ="sid")
-    private int sid;
+
 
     public int gettId() {
         return tId;

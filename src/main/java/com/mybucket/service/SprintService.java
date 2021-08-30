@@ -1,5 +1,6 @@
 package com.mybucket.service;
 
+import com.amazonaws.services.frauddetector.model.ResourceNotFoundException;
 import com.mybucket.dto.SprintResponse;
 import com.mybucket.dto.StatusResponse;
 import com.mybucket.dto.UserResponse;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SprintService {
@@ -26,8 +28,20 @@ public class SprintService {
         return  sprintRepository.findAll();
     }
 
-    public Sprint getSprintById(int sid) {
+    /*public Sprint getSprintById(int sid) {
         return sprintRepository.findById(sid).orElseThrow(() -> new SprintNotFoundException(sid));
+    }*/
+    public Sprint getSprintById(int sid) {
+        Optional<Sprint> result = sprintRepository.findById(sid);
+        if(result.isPresent()) {
+            return result.get();
+        }else {
+            throw new SprintNotFoundException(sid);
+        }
+
+//		Post post = postRepository.findById(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+        //return post;
     }
     public Sprint updateSprint(int sid, Sprint sprint) {
         sprint.setSid(sid);
@@ -38,12 +52,12 @@ public class SprintService {
         return "Sprint sid";
     }
 
-    public StatusResponse searchSprint(int sid,String status) {
-        return  sprintRepository.findByStatus(status).get(sid);
+    public List<StatusResponse> searchSprint(String status ,String name) {
+        return sprintRepository.findByStatusAndName(status,name);
     }
 
-    public List<UserResponse> searchUserName(String userName) {
-        return sprintRepository.findByUserName(userName);
+    public List<UserResponse> searchUserName(String userName,String name) {
+        return sprintRepository.findByUserNameANDName(userName,name);
     }
 
     public List<SprintResponse> getstatus(String status) {
