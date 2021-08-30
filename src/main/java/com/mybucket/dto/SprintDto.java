@@ -8,6 +8,7 @@ import java.util.Date;
 public class SprintDto {
     private int sid;
     private String name;
+    private String description;
     private Date startDate;
     private Date endDate;
 

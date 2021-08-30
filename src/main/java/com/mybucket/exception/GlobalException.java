@@ -35,7 +35,15 @@ public class GlobalException extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleSprintNotFoundException(SprintNotFoundException ex, WebRequest request) {
         Map<String, Object> error = new LinkedHashMap<>();
         error.put("timestamp", LocalDateTime.now());
-        error.put("message", "sid not found" );
+        error.put("message", "this sprint id not available" );
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
+        Map<String, Object> error = new LinkedHashMap<>();
+        error.put("timestamp", LocalDateTime.now());
+        error.put("message", "this user id not available"  );
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
