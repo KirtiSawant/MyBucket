@@ -1,16 +1,12 @@
 package com.mybucket.service;
 
-import com.amazonaws.services.frauddetector.model.ResourceNotFoundException;
-import com.mybucket.dto.SprintResponse;
-import com.mybucket.dto.StatusResponse;
-import com.mybucket.dto.UserResponse;
+import com.mybucket.dto.*;
 import com.mybucket.exception.SprintNotFoundException;
 import com.mybucket.model.Sprint;
 import com.mybucket.repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,9 +69,14 @@ public class SprintService {
         return sprintRepository.findByUserNameANDNameANDStatus(userName,name,status);
     }
 
-    public List<SprintResponse> getAllTaskSprint(String name) {
+    public List<StatisticsSprintResponse> getAllTaskSprint(List<String> name) {
         return sprintRepository.findByName(name);
 
+    }
+
+    public List<StatisticsSprintUser> getStatisticsSprint(String name, String userName) {
+
+        return sprintRepository.findByNameAndUserName(name,userName);
     }
 }
 

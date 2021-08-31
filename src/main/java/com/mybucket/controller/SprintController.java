@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -102,8 +103,14 @@ public class SprintController {
                 .collect(Collectors.toList());
     }
     @GetMapping("sprints/tasks")
-    public List<SprintResponse> getAllTaskSprint(@RequestParam String name){
-        return sprintService.getAllTaskSprint(name);
+    public List<StatisticsSprintResponse> getAllTaskSprint(@RequestParam List<String> name){
+
+        return sprintService.getAllTaskSprint(name).stream().map(sprintRequest -> modelMapper.map(sprintRequest, StatisticsSprintResponse.class))
+                .collect(Collectors.toList());
+    }
+    @GetMapping("sprint/user")
+    public List<StatisticsSprintUser> getStatisticsSprint(@RequestParam String name,@RequestParam String userName){
+       return sprintService.getStatisticsSprint(name,userName);
     }
 
 }
