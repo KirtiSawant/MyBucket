@@ -77,9 +77,9 @@ public class SprintController {
     public List<StatusResponse> searchSprint(@RequestParam String status,@RequestParam String name){
        return sprintService.searchSprint(status,name);
    }
-    @GetMapping("sprint/task")
-    public List<Sprint> getTask(){
-        return sprintService.getTask();
+    @GetMapping("sprint/tasks/{sid}")
+    public Sprint getTask(@PathVariable(name = "sid") int sid){
+        return sprintService.getTask(sid);
     }
 
     @GetMapping("sprint/userName")
@@ -88,7 +88,22 @@ public class SprintController {
                 .collect(Collectors.toList());
     }
     @GetMapping("sprint/statusCount")
-    public List<SprintResponse> getStatus(@RequestParam String status){
-       return sprintService.getstatus(status);
+    public List<SprintResponse> getStatus(@RequestParam String status,@RequestParam String name){
+       return sprintService.getstatus(status,name);
     }
+
+    @GetMapping("sprint/count")
+    public List<SprintResponse> getAllSprintCount(@RequestParam String status){
+       return sprintService.getAllSprintCount(status);
+    }
+  @GetMapping("sprint/user/task")
+   public List<UserResponse> searchUserTaskStatus(@RequestParam String userName,String name,String status){
+        return sprintService.searchUserTaskStatus(userName,name,status).stream().map(sprint -> modelMapper.map(sprint, UserResponse.class))
+                .collect(Collectors.toList());
+    }
+    @GetMapping("sprints/tasks")
+    public List<SprintResponse> getAllTaskSprint(@RequestParam String name){
+        return sprintService.getAllTaskSprint(name);
+    }
+
 }

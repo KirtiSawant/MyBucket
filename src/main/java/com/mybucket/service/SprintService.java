@@ -10,6 +10,7 @@ import com.mybucket.repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,8 @@ public class SprintService {
     public List<Sprint> getAllSprint() {
         return (List<Sprint>) sprintRepository.findAll();
     }
-    public List<Sprint> getTask() {
-        return  sprintRepository.findAll();
+    public Sprint getTask(int sid) {
+        return  sprintRepository.findById(sid).get();
     }
 
     /*public Sprint getSprintById(int sid) {
@@ -49,7 +50,7 @@ public class SprintService {
     }
     public String deleteSprint(int sid) {
         sprintRepository.deleteById(sid);
-        return "Sprint sid";
+        return "Sprint Deleted";
     }
 
     public List<StatusResponse> searchSprint(String status ,String name) {
@@ -60,8 +61,21 @@ public class SprintService {
         return sprintRepository.findByUserNameANDName(userName,name);
     }
 
-    public List<SprintResponse> getstatus(String status) {
-        return sprintRepository.findAllByStatus(status);
+    public List<SprintResponse> getstatus(String status,String name) {
+        return sprintRepository.findAllByStatusANDName(status,name);
+    }
+
+    public List<SprintResponse> getAllSprintCount(String status){
+        return sprintRepository.findByStatus(status);
+    }
+
+    public List<UserResponse> searchUserTaskStatus(String userName, String name, String status) {
+        return sprintRepository.findByUserNameANDNameANDStatus(userName,name,status);
+    }
+
+    public List<SprintResponse> getAllTaskSprint(String name) {
+        return sprintRepository.findByName(name);
+
     }
 }
 

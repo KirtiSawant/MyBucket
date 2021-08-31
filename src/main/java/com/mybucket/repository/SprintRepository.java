@@ -25,6 +25,17 @@ public interface SprintRepository extends CrudRepository<Sprint,Integer> {
     List<UserResponse> findByUserNameANDName(String user_name,String name);
 
    // @Query("select s.sid,t.t_id,s.name,COUNT(t.status) AS status from task t join sprint s  on t.t_id=t.sid where t.status=:status")
-    @Query("SELECT s.sid,s.name, count(t.status) as statuscount FROM  sprint s  INNER JOIN task t USING (sid) where t.status=:status group by s.name")
-    List<SprintResponse> findAllByStatus(String status);
+    @Query("SELECT s.sid,s.name, count(t.status) as statuscount FROM  sprint s  INNER JOIN task t USING (sid) where t.status=:status AND s.name=:name")
+    List<SprintResponse> findAllByStatusANDName(String status,String name);
+    @Query("SELECT s.sid,s.name, count(t.status) as statuscount FROM  sprint s  INNER JOIN task t USING (sid) where t.status=:status GROUP BY s.name")
+    List<SprintResponse> findByStatus(String status);
+
+    @Query("SELECT s.name,u.user_name,t.description,t.priority,t.status,t.project,t.hour_spent,t.estimated_hour\n" +
+            "FROM task t JOIN  user u ON t.uid=u.uid join sprint s on t.sid=u.uid where u.user_name=:user_name AND s.name=:name AND t.status=:status")
+    List<UserResponse> findByUserNameANDNameANDStatus(String user_name, String name, String status);
+
+    @Query("\n" +
+            "SELECT s.sid,s.name,t.status,count( t.status) as statuscount FROM  sprint s\n" +
+            "INNER JOIN task t using(sid)  where s.name=:name or s.name=name group by t.status\n")
+    List<SprintResponse> findByName(String name);
 }
