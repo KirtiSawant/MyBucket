@@ -70,11 +70,17 @@ public class SprintService {
     }
 
     public List<StatisticsSprintResponse> getAllTaskSprint(List<String> name) {
+       /* String str="sprint1,sprint2";
+        String[] res=str.split("[,]",0);
+        for (String myStr:res){
+            System.out.println(myStr);
+        }*/
+
         return sprintRepository.findByName(name);
 
     }
 
-    public List<StatisticsSprintUser> getStatisticsSprint(String name, String userName) {
+    public List<StatisticsSprintUser> getStatisticsSprint(List<String> name, List<String> userName) {
 
         return sprintRepository.findByNameAndUserName(name,userName);
     }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,7 +32,7 @@ public class SprintController {
         return sprintService.createSprint(sprint);
     }*/
    @PostMapping("sprint")
-   public ResponseEntity<SprintDto> createSprint(@RequestBody Sprint SprintDto) {
+   public ResponseEntity<SprintDto> createSprint(@Valid @RequestBody Sprint SprintDto) {
 
        // convert DTO to entity
        Sprint sprintRequest = modelMapper.map(SprintDto, Sprint.class);
@@ -103,13 +104,13 @@ public class SprintController {
                 .collect(Collectors.toList());
     }
     @GetMapping("sprints/tasks")
-    public List<StatisticsSprintResponse> getAllTaskSprint(@RequestParam List<String> name){
+    public List<StatisticsSprintResponse> getAllTaskSprint(@RequestParam("name") List<String> name){
 
         return sprintService.getAllTaskSprint(name).stream().map(sprintRequest -> modelMapper.map(sprintRequest, StatisticsSprintResponse.class))
                 .collect(Collectors.toList());
     }
     @GetMapping("sprint/user")
-    public List<StatisticsSprintUser> getStatisticsSprint(@RequestParam String name,@RequestParam String userName){
+    public List<StatisticsSprintUser> getStatisticsSprint(@RequestParam List<String> name,@RequestParam List<String> userName){
        return sprintService.getStatisticsSprint(name,userName);
     }
 

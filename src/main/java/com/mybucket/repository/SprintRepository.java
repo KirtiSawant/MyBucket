@@ -38,14 +38,14 @@ public interface SprintRepository extends CrudRepository<Sprint,Integer> {
     @Query("SELECT s.sid,s.name,count(CASE WHEN t.status='DONE' THEN 1 ELSE NULL END) as statusdone,\n" +
             "count(CASE WHEN t.status='TO_DO' THEN 1 ELSE NULL END) as statustodo,\n" +
             "count(CASE WHEN t.status='IN_PROGRESS' THEN 1 ELSE NULL END) as statusinprogress FROM  sprint s\n" +
-            "INNER JOIN task t using(sid)  where  s.name=:name or s.name=:name group by s.name;")
+            "INNER JOIN task t using(sid)  where  s.name in(:name)  group by s.name;")
     List<StatisticsSprintResponse> findByName(List<String> name);
 
     @Query("SELECT u.user_name,s.name,count(CASE WHEN t.status='DONE' THEN 1 ELSE NULL END) as statusdone,\n" +
             "count(CASE WHEN t.status='TO_DO' THEN 1 ELSE NULL END) as statustodo,\n" +
             "count(CASE WHEN t.status='IN_PROGRESS' THEN 1 ELSE NULL END) as statusinprogress FROM  sprint s\n" +
-            "INNER JOIN task t using(sid) join user u using(uid) where  (s.name=:name and user_name=:user_name)\n" +
-            "or (s.name=:name and user_name=:user_name)\n" +
+            "INNER JOIN task t using(sid) join user u using(uid) where" +
+            " s.name  in (:name) and u.user_name in(:user_name)"+
             "group by s.name;")
-    List<StatisticsSprintUser> findByNameAndUserName(String name, String user_name);
+      List<StatisticsSprintUser> findByNameAndUserName(List<String> name, List<String> user_name);
 }
