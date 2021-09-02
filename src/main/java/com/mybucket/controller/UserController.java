@@ -1,8 +1,7 @@
 package com.mybucket.controller;
 
-import com.mybucket.dto.SprintDto;
+
 import com.mybucket.dto.UserDto;
-import com.mybucket.model.Sprint;
 import com.mybucket.model.User;
 import com.mybucket.service.UserService;
 import org.modelmapper.ModelMapper;

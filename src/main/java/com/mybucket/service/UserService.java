@@ -35,7 +35,6 @@ public class UserService {
     public User updateUser (int uid,User userRequest){
         User user = userRepository.findById(uid)
                 .orElseThrow(() -> new UserNotFoundException(uid));
-
         user.setUserName(userRequest.getUserName());
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());

@@ -2,7 +2,9 @@ package com.mybucket.service;
 
 import com.mybucket.dto.*;
 import com.mybucket.exception.SprintNotFoundException;
+import com.mybucket.exception.UserNotFoundException;
 import com.mybucket.model.Sprint;
+import com.mybucket.model.User;
 import com.mybucket.repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +27,7 @@ public class SprintService {
         return  sprintRepository.findById(sid).get();
     }
 
-    /*public Sprint getSprintById(int sid) {
-        return sprintRepository.findById(sid).orElseThrow(() -> new SprintNotFoundException(sid));
-    }*/
+
     public Sprint getSprintById(int sid) {
         Optional<Sprint> result = sprintRepository.findById(sid);
         if(result.isPresent()) {
@@ -36,13 +36,16 @@ public class SprintService {
             throw new SprintNotFoundException(sid);
         }
 
-//		Post post = postRepository.findById(id)
-//				.orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
-        //return post;
     }
-    public Sprint updateSprint(int sid, Sprint sprint) {
-        sprint.setSid(sid);
-        return   sprintRepository.save(sprint);
+    public Sprint updateSprint(int sid, Sprint sprintRequest) {
+        Sprint sprint = sprintRepository.findById(sid)
+                .orElseThrow(() -> new SprintNotFoundException(sid));
+
+        sprint.setName(sprintRequest.getName());
+        sprint.setDescription(sprintRequest.getDescription());
+        sprint.setStartDate(sprintRequest.getStartDate());
+        sprint.setEndDate(sprintRequest.getEndDate());
+        return sprintRepository.save(sprint);
     }
     public String deleteSprint(int sid) {
         sprintRepository.deleteById(sid);
@@ -70,11 +73,6 @@ public class SprintService {
     }
 
     public List<StatisticsSprintResponse> getAllTaskSprint(List<String> name) {
-       /* String str="sprint1,sprint2";
-        String[] res=str.split("[,]",0);
-        for (String myStr:res){
-            System.out.println(myStr);
-        }*/
 
         return sprintRepository.findByName(name);
 

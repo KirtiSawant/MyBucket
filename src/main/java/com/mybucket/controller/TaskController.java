@@ -1,10 +1,9 @@
 package com.mybucket.controller;
 
-import com.mybucket.dto.StatusResponse;
+
 import com.mybucket.model.GroupUser;
 import com.mybucket.model.Task;
 import com.mybucket.model.TaskJoin;
-import com.mybucket.model.User;
 import com.mybucket.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

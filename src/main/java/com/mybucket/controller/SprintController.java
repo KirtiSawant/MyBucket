@@ -2,6 +2,7 @@ package com.mybucket.controller;
 
 import com.mybucket.dto.*;
 import com.mybucket.model.Sprint;
+import com.mybucket.model.User;
 import com.mybucket.service.SprintService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,6 @@ public class SprintController {
     SprintService sprintService;
 
 
-   /* @PostMapping("sprint")
-    public Sprint createSprint(@Valid @RequestBody Sprint sprint){
-
-        return sprintService.createSprint(sprint);
-    }*/
    @PostMapping("sprint")
    public ResponseEntity<SprintDto> createSprint(@Valid @RequestBody Sprint SprintDto) {
 
@@ -50,10 +46,6 @@ public class SprintController {
                 .collect(Collectors.toList());
     }
 
-   /* @GetMapping("/sprint/{sid}")
-    public Sprint getSprintById(@PathVariable("sid") int sid) {
-        return sprintService.getSprintById(sid);
-    }*/
 
     @GetMapping("sprint/{sid}")
     public ResponseEntity<SprintDto> getSprintById(@PathVariable(name = "sid") int sid) {
@@ -65,9 +57,18 @@ public class SprintController {
         return ResponseEntity.ok().body(sprintResponse);
     }
     @PutMapping("/sprint/{sid}")
-    public Sprint updateSprint(@PathVariable("sid") int sid, @RequestBody Sprint sprint) {
-        return sprintService.updateSprint(sid,sprint);
+    public ResponseEntity<SprintDto> updateSprint(@PathVariable("sid") int sid, @RequestBody SprintDto sprintDto) {
+        Sprint sprintRequest = modelMapper.map(sprintDto, Sprint.class);
+
+        Sprint sprint = sprintService.updateSprint(sid, sprintRequest);
+
+        // entity to DTO
+        SprintDto sprintResponse = modelMapper.map(sprint, SprintDto.class);
+
+        return ResponseEntity.ok().body(sprintResponse);
     }
+
+
     @DeleteMapping("/sprint/{sid}")
     public String deleteSprint(@PathVariable("sid") int sid) {
        return sprintService.deleteSprint(sid);

@@ -29,10 +29,6 @@ public class TaskService {
         return Sort.Direction.ASC;
     }
 
-      @Autowired
-      UserRepository userRepository;
-     @Autowired
-     SprintRepository sprintRepository;
 
     public Task addTask(Task task) {
         //  User user = new User();
@@ -73,8 +69,6 @@ public class TaskService {
     public List<GroupUser> getEstimatedHours(String status) {
         return taskRepository.sumByStatus(status);
     }
-
-
 
     public List<Task> search(Integer pageNo, Integer pageSize, String status, String project, String priority,String[] sortBy) {
         List<Sort.Order> orders = new ArrayList<Sort.Order>();
